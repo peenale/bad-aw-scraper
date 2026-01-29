@@ -140,7 +140,7 @@ async function selectEpisode(event, ID) {
 
     if (castSession) {
         // If connected to TV, send it there
-        castVideo(videoLink, anime.title, ID);
+        castVideo(videoLink, `Ahahah coglione niente titolo`, ID);
     } else {
         // If not connected, play on the phone as usual
         document.getElementById('video').innerHTML = `<source src="${videoLink}">`;
