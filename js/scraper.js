@@ -1,6 +1,6 @@
 const ANIMEWORLD_BASE = 'https://www.animeworld.ac';
 const ANIMEWORLD_API = '/api/episode/serverPlayerAnimeWorld?id=';
-const PROXY = 'https://corsproxy.io/?url=';
+const PROXY = 'https://api.allorigins.win/raw?url=';
 const POSTER_BASE = 'https://img.animeworld.ac/locandine/';
 
 async function getAnimes(title) {
