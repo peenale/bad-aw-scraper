@@ -123,8 +123,43 @@ async function selectEpisode(event, ID) {
     const videoTag = doc.getElementById('video-player');
     const videoLink = videoTag.children[0].getAttribute('src');
 
-    document.getElementById('video').innerHTML = `<source src="${videoLink}">`;
+
+    // Inside selectEpisode
+    const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+
+    if (castSession) {
+        // If connected to TV, send it there
+        castVideo(videoLink, anime.title, ID);
+    } else {
+        // If not connected, play on the phone as usual
+        document.getElementById('video').innerHTML = `<source src="${videoLink}">`;
     document.getElementById('video').load();
+    }
+    
+}
+
+async function castVideo(videoUrl, animeTitle, episodeNum) {
+  const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+  
+  if (castSession) {
+    const mediaInfo = new chrome.cast.media.MediaInfo(videoUrl, 'video/mp4');
+    const metadata = new chrome.cast.media.GenericMediaMetadata();
+    
+    metadata.metadataType = chrome.cast.media.MetadataType.GENERIC;
+    metadata.title = animeTitle;
+    metadata.subtitle = `Episodio ${episodeNum}`;
+    
+    mediaInfo.metadata = metadata;
+
+    const request = new chrome.cast.media.LoadRequest(mediaInfo);
+    
+    try {
+      await castSession.loadMedia(request);
+      console.log('Casting started!');
+    } catch (err) {
+      console.error('Cast failed', err);
+    }
+  }
 }
 /*
 function selectAnime(event, element, selected) {

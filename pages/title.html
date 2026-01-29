@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="manifest" href="./../manifest.json">
+        <script src="https://www.gstatic.com/cv/js/sender/v3/cast_sender.js?loadCastFramework=1"></script>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +19,21 @@
                 const anime = JSON.parse(atob(b64title));
                 generatePage(anime);
             });
+
+            window.__onGCastApiAvailable = function(isAvailable) {
+                if (isAvailable) {
+                    initializeCastApi();
+                }
+            };
+
+            function initializeCastApi() {
+                const context = cast.framework.CastContext.getInstance();
+                context.setOptions({
+                    // The Default Media Receiver is a standard player Google provides
+                    receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                    autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+                });
+            }
         </script>
 
         <div id="back">
@@ -42,6 +58,7 @@
         </div>
         <div class="row">
             <video controls id="video"></video>
+            <google-cast-launcher id="castbutton"></google-cast-launcher>
         </div>
     </body>
 </html>

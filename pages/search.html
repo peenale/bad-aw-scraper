@@ -11,8 +11,10 @@
         <link href="./../css/style.css" rel="stylesheet">
     </head>
     <body>
-        <input type="text" id="text">
-        <button onclick="getAnimes(document.getElementById('text').value)">cerca</button>
+        <form onsubmit="return false;">
+            <input type="text" id="text">
+            <button onclick="getAnimes(document.getElementById('text').value)">cerca</button>
+        </form>
         <div id="result" class="container-sm"></div>
     </body>
 </html>
