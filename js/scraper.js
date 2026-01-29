@@ -112,6 +112,21 @@ async function getEpisodes(anime) {
 
 
 async function selectEpisode(event, ID) {
+
+    event.preventDefault();
+
+    // --- SAFETY GUARD START ---
+    let castSession = null;
+    // Check if 'cast' exists and if the framework is ready
+    if (typeof cast !== 'undefined' && cast.framework) {
+        try {
+            castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+        } catch (e) {
+            console.log("Cast context not ready yet.");
+        }
+    }
+    // --- SAFETY GUARD END ---
+
     event.preventDefault();
     console.log(ID);
 
@@ -122,10 +137,6 @@ async function selectEpisode(event, ID) {
     const doc = parser.parseFromString(text, 'text/html');
     const videoTag = doc.getElementById('video-player');
     const videoLink = videoTag.children[0].getAttribute('src');
-
-
-    // Inside selectEpisode
-    const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
 
     if (castSession) {
         // If connected to TV, send it there
