@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="manifest" href="/manifest.json">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="/js/scraper.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link href="/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const b64title = params.get('title');
+                const anime = JSON.parse(atob(b64title));
+                generatePage(anime);
+            });
+        </script>
+
+        <div id="back">
+            <a href="./search.html">
+                <img src="/images/back.svg">
+            </a>
+        </div>
+        <div class="d-flex justify-content-centers" id="title-overview">
+            <div class="poster" id="poster-div"></div>
+            <div class="d-flex flex-column justify-content-centers align-items-center" id="anime-data">
+                <h3 id="anime-title"></h3> <br>
+                <h5 id="anime-episodes"></h5>
+            </div>
+        </div>
+        <div class="row" id="select-row">
+        <div class="col" id="ep-select">
+            <form name="form" onsubmit="selectEpisode(event, this.selectedEpisode.value); return false;">
+                <select name="selectedEpisode" id="selector"></select>
+                <input type="submit" value="Carica episodio">
+            </form>
+        </div>
+        </div>
+        <div class="row">
+            <video controls id="video"></video>
+        </div>
+    </body>
+</html>
