@@ -50,3 +50,26 @@
     width: 15vw;
     height: 15vh;
 }
+
+#animeField {
+    margin-top: 5vh;
+}
+
+#animeField div {
+    display: inline;
+    margin-left: 5vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#animeField div input,
+.btn {
+    font-size: 20pt;
+    padding: 1.5rem;
+}
+
+select.form-control {
+    display: inline;
+    width: 30%;
+    padding: 1.5rem;
+}

@@ -11,10 +11,16 @@
         <link href="./../css/style.css" rel="stylesheet">
     </head>
     <body>
-        <form onsubmit="return false;">
-            <input type="text" id="text">
-            <button onclick="getAnimes(document.getElementById('text').value)">cerca</button>
-        </form>
+        <div class="d-flex flex-row align-items-center justify-content-center" id="search-div">
+            <form id="animeField" onsubmit="return false;">
+                <div class="form-group">
+                    <input type="text" placeholder="Titolo..." id="text" required>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" onclick="getAnimes(document.getElementById('text').value)">Cerca</button>
+                </div>
+            </form>
+        </div>
         <div id="result" class="container-sm"></div>
     </body>
 </html>
