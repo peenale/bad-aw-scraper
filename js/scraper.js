@@ -95,7 +95,7 @@ async function getEpisodes(anime) {
         const doc = parser.parseFromString(text, 'text/html');
 
         const episodesTab = doc.getElementById('animeId');
-        const anchors = episodesTab.querySelectorAll('li.episode a');
+        const anchors = episodesTab.querySelectorAll('.server.active li.episode a');
 
         let episodeIDs = [];
         anchors.forEach((a) => {
